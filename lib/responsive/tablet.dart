@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../layout/myAppBar.dart';
+import '../layout/myBox.dart';
+import '../layout/myCard.dart';
 
 class TabletScaffold extends StatefulWidget {
   const TabletScaffold({Key? key}) : super(key: key);
@@ -9,6 +11,8 @@ class TabletScaffold extends StatefulWidget {
 }
 
 class _TabletScaffoldState extends State<TabletScaffold> {
+var items = ['items', 'items','items','items','items','items','items','items','items','items','items','items','items','items','items','items'];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,9 +24,31 @@ class _TabletScaffoldState extends State<TabletScaffold> {
         child: Column(
           children: [
             // first 4 boxes in grid
-        
+        AspectRatio(
+              aspectRatio: 4,
+              child: SizedBox(
+                width: double.infinity,
+                child: GridView.builder(
+                  itemCount: 4,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 4),
+                  itemBuilder: (context, index) {
+                    return MyBox();
+                  },
+                ),
+              ),
+            ),
             // list of previous days
-            
+                Expanded(
+              child: ListView.builder(
+                itemCount: items.length,
+                itemBuilder: (context, index) {
+                 return ListTile(
+              title: Text(items[index]),
+            );
+                },
+              ),
+            ),
           ],
         ),
       ),

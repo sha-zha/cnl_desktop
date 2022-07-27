@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../layout/myAppBar.dart';
+import '../layout/myBox.dart';
+import '../layout/myCard.dart';
 
 class DesktopScaffold extends StatefulWidget {
   const DesktopScaffold({Key? key}) : super(key: key);
@@ -14,7 +16,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
     return Scaffold(
       backgroundColor: defaultBackgroundColor,
       appBar: myAppBar,
-      body: Padding(
+      body:Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -28,25 +30,68 @@ class _DesktopScaffoldState extends State<DesktopScaffold> {
               child: Column(
                 children: [
                   // first 4 boxes in grid
+                   AspectRatio(
+                    aspectRatio: 3,
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: GridView.builder(
+                        itemCount: 3,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 3),
+                        itemBuilder: (context, index) {
+                          return MyBox();
+                        },
+                      ),
+                    ),
+                  ),
                  
                   // list of previous days
-                  
+                 Expanded(
+                    child: ListView.builder(
+                      itemCount: 7,
+                      itemBuilder: (context, index) {
+                        return const MyCard();
+                      },
+                    ),
+                  ), 
                 ],
               ),
             ),
-            // second half of page
+
+             // second half of page
             Expanded(
               child: Column(
                 children: [
-                  
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      height: 400,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: Colors.grey[400],
+                      ),
+                    ),
+                  ),
                   // list of stuff
-                 
-                ],
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: Colors.grey[200],
+                        ),
+                      ),
+                    ),
+                  ),
+          
+              ],
               ),
-            ),
+              ),
           ],
         ),
-      ),
+            ), 
     );
   }
 }
